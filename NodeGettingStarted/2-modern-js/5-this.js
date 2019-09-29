@@ -1,6 +1,7 @@
 // "this" here is "exports"
 
 this.id = 'exports';
+console.log(this);
 
 const testerObj = {
   func1: function () {
