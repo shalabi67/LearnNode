@@ -1,0 +1,14 @@
+{
+  "name": "learn_mocha",
+  "version": "1.0.0",
+  "description": "learn mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha './test/**/*.spec.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^6.2.1"
+  }
+}
