@@ -13,6 +13,10 @@
 - on package.json file chage test to be "test": "tsc && node node_modules/cucumber/bin/cucumber-js featuers/"
 
 
+##Report 
+- npm install simple-cucumber-html-reporter --save-dev
+
+
 ##Run
 -- tsc
 -- npm test
