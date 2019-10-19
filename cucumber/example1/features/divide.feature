@@ -1,5 +1,7 @@
+@calculator
 Feature: As a user, i want to divide two numbers
 
+  @divide @main
   Scenario Outline: : Divide two numbers
     Given a calculator
     When I divide <opr1> by <opr2>

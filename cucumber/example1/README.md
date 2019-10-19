@@ -17,9 +17,13 @@
 
 ##Report 
 - mkdir report
+### simple html report
 - npm install simple-cucumber-html-reporter --save-dev
-- node node_modules\simple-cucumber-html-reporter
 - node test\report
+
+### html report
+- npm install cucumber-html-reporter --save-dev
+- node 
 
 ##Run
 -- tsc
