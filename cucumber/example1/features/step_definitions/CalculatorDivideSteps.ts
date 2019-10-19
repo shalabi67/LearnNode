@@ -14,13 +14,14 @@ export class CalculatorDivideSteps {
         this.result = 0;
     }
 
-    @when(/^I divide (\d+) by (\d+)$/)
+    @when(/^I divide (.*) by (.*)$/)
     public divide(oper1: number, oper2:number) {
         this.result = this.calculator.divide(oper1, oper2);
     };
 
-    @then(/^the result is (\d+)$/)
-    public evaluate(expectedResult: number) {
-        expect(this.result).be.eq(expectedResult);
+    @then(/^the result is (.*)$/)
+    public evaluate(expectedResult: string) {
+        const result: number = parseInt(expectedResult);
+        expect(this.result).be.eq(result);
     };
 }

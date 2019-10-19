@@ -17,9 +17,9 @@ report.generate({
     customData: {
         title: "Automation Run",
         data: [
-            { label: "Project", value: "Simple project" },
+            { label: "Project", value: "Calculator project" },
             { label: "Release", value: "1.0.0" },
-            { label: "Sprint", value: "5" }
+            { label: "Sprint", value: "1" }
         ]
     }
 });

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc && node node_modules\\cucumber\\bin\\cucumber-js --format json:./report/example1.json featuers/"
+    "test": "tsc && node node_modules\\\\cucumber\\\\bin\\\\cucumber-js --format json:./report/example1.json features/"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,7 @@
     "@types/cucumber": "^4.0.7",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
-    "cucumber": "^6.0.2",
+    "cucumber": "^5.1.0",
     "cucumber-tsflow": "^3.2.0",
     "find": "^0.3.0",
     "mocha": "^6.2.1",
