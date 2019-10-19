@@ -4,7 +4,7 @@ import {expect} from "chai";
 
 @binding()
 export class CalculatorDivideSteps {
-    private calculator: Calculator = new Calculator();;
+    private calculator: Calculator = new Calculator();
     private result: number = 0;
 
 
