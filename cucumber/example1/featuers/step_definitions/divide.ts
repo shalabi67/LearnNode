@@ -1,3 +1,4 @@
+/*
 import {Given, Then, When} from 'cucumber'
 import {Calculator} from "../../src/Calculator";
 import {expect} from 'chai';
@@ -13,3 +14,4 @@ When(/^I divide (\d+) by (\d+)$/, function (oper1: number, oper2:number) {
 Then(/^the result is (\d+)$/, function (expectedResult: number) {
     expect(result).be.eq(expectedResult);
 });
+*/
