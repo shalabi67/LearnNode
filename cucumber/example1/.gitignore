@@ -1,5 +1,6 @@
 .idea/
 report/
+target/
 # Logs
 logs
 *.log
