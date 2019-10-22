@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "tsc && node ./target/example.js",
-    "trans": "tsc && node ./target/transactions.js"
+    "trans": "tsc && node ./target/transactions.js",
+    "database": "tsc && node ./target/database_example.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^12.11.2",
-    "ts-postgres": "^1.1.0"
+    "@types/node": "^12.11.2"
   },
   "dependencies": {
     "@types/pg": "^7.11.2",
