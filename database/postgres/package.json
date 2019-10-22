@@ -4,7 +4,7 @@
   "description": "Shows how to use postgres with typescript",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && node ./target/example3.js"
+    "test": "tsc && node ./target/example.js"
   },
   "keywords": [],
   "author": "",
