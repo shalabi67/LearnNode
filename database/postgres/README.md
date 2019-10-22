@@ -1,6 +1,7 @@
 #shows how to use postgres with typescript
 http://zetcode.com/javascript/nodepostgres/
 https://github.com/malthe/ts-postgres
+https://www.youtube.com/watch?v=ufdHsFClAk0
 
 ##start database
 - sudo docker-compose -f database.yaml up
@@ -15,5 +16,5 @@ https://github.com/malthe/ts-postgres
 - tsc --init
 - npm install --save pg @types/pg
 - npm i --save-dev @types/node
-- npm install --save-dev ts-postgres
+
 
