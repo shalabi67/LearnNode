@@ -10,7 +10,7 @@ let configuration: ClientConfig = {
     password: 'example'
 }
 const client = new Client(configuration);
-const query = 'SELECT id, first_name, last_name, email FROM person';
+const query = 'SELECT id, first_name, last_name, email, created_on FROM person';
 async function getData(client : Client, query: string, values?:Array<any>):Promise<Array<Person>> {
     console.log("getData");
     let data: Array<Person> = new Array<Person>();

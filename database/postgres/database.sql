@@ -3,7 +3,7 @@ CREATE TABLE person(
     first_name VARCHAR (50) UNIQUE NOT NULL,
     last_name VARCHAR (50) NOT NULL,
     email VARCHAR (355) UNIQUE NOT NULL,
-    created_on TIMESTAMP NOT NULL,
+    created_on TIMESTAMP not null default CURRENT_DATE,
     last_login TIMESTAMP
 );
 insert into person(first_name, last_name, email) values('mohammad', 'shalabi', 'a@b.com');

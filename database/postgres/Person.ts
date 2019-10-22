@@ -3,4 +3,6 @@ export class Person {
     first_name: string = '';
     last_name: string = '';
     email: string = '';
+    created_on: string = '';
+    last_login: string = '';
 }
