@@ -11,21 +11,21 @@ let configuration: ClientConfig = {
 }
 const client = new Client(configuration);
 const query = 'SELECT id, first_name, last_name, email, created_on FROM person';
-async function getData(client : Client, query: string, values?:Array<any>):Promise<Array<Person>> {
-    console.log("getData");
-    let data: Array<Person> = new Array<Person>();
+async function find<T>(client : Client, query: string, values?:Array<any>):Promise<Array<T>> {
+    //console.log("getData");
+    let data: Array<T> = new Array<T>();
     try {
         await client.connect();
-        console.log('connected.');
+        //console.log('connected.');
 
         const queryResult = await client.query(query, values);
-        console.log(queryResult.rows);
+        //console.log(queryResult.rows);
         console.table(queryResult.rows); //will not display anything, but it will be used in debugger
 
         for (const row of queryResult.rows) {
-            let person: Person = row;
+            let person: T = row;
             data.push(person);
-            console.log(row.first_name);
+            //console.log(row.first_name);
         }
     } catch (e) {
         console.error(e);
@@ -36,5 +36,19 @@ async function getData(client : Client, query: string, values?:Array<any>):Promi
     return data;
 }
 
-getData(client, query);
-getData(new Client(configuration), query+' where first_name=$1', ["mohammad"]);
+
+find<Person>(client, query)
+    .then(people => {
+        console.log('getting all people');
+        for(const person of people) {
+            console.log(person);
+        }
+    });
+
+find<Person>(new Client(configuration), query+' where first_name=$1', ["mohammad"])
+    .then(people => {
+        console.log("getting mohammad data")
+        for(const person of people) {
+            console.log(person);
+        }
+    });
