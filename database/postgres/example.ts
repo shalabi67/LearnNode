@@ -1,6 +1,7 @@
 import {Client, ClientConfig} from 'pg';
 import {Person} from "./Person";
 import {find} from "./find";
+import {Database} from "./Database";
 
 
 let configuration: ClientConfig = {
@@ -10,8 +11,9 @@ let configuration: ClientConfig = {
     user: 'postgres',
     password: 'example'
 }
+const database = new Database<Person>();
 const client = new Client(configuration);
-const query = new Person().getQuery();
+const query = database.getQuery(new Person());
 
 find<Person>(client, query)
     .then(people => {

@@ -16,5 +16,6 @@ https://www.youtube.com/watch?v=ufdHsFClAk0
 - tsc --init
 - npm install --save pg @types/pg
 - npm i --save-dev @types/node
-
+- npm install --save-dev cucumber chai mocha @types/cucumber @types/chai @types/mocha
+- npm install --save-dev cucumber-tsflow
 

@@ -9,17 +9,20 @@ let configuration: ClientConfig = {
     user: 'postgres',
     password: 'example'
 }
-const client = new Client(configuration);
-const query = new Person().getQuery();
 
-Database.find(client, query)
+const database = new Database<Person>();
+const client = new Client(configuration);
+const query = database.getQuery(new Person());
+
+
+database.find(client, query)
     .then(people => {
         console.log('getting all people');
         for(const person of people) {
             console.log(person);
         }
     });
-Database.find<Person>(new Client(configuration), query+' where first_name=$1', ["mohammad"])
+database.find<Person>(new Client(configuration), query+' where first_name=$1', ["mohammad"])
     .then(people => {
         console.log("getting mohammad data")
         for(const person of people) {
@@ -27,17 +30,17 @@ Database.find<Person>(new Client(configuration), query+' where first_name=$1', [
         }
     });
 
-const firstName = "firstName5";
-const email = "email5";
+const firstName = "firstName6";
+const email = "email6";
 let person = Person.create(firstName,'lastName', email);
-const insert = person.getInsert();
-Database.save<Person>(new Client(configuration), insert, person)
-    .then(() => {
-        console.log('Adding new person');
+const insert = database.getQuery(person);
+database.save<Person>(new Client(configuration), insert, person)
+    .then(person => {
+        console.log(`Adding new person with id ${person.id}`);
     })
     .then(() => {
-        Database.find<Person>(new Client(configuration),
-            person.getQuery() + ' where first_name=$1', [firstName])
+        database.find<Person>(new Client(configuration),
+                database.getQuery(person) + ' where first_name=$1', [firstName])
             .then(people => {
                 console.log('get person');
                 for(const person of people) {

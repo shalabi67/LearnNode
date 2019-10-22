@@ -6,13 +6,21 @@
   "scripts": {
     "test": "tsc && node ./target/example.js",
     "trans": "tsc && node ./target/transactions.js",
-    "database": "tsc && node ./target/database_example.js"
+    "database": "tsc && node ./target/database_example.js",
+    "cucumber": "tsc && node node_modules/cucumber/bin/cucumber-js --format json:./report/save.json features/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^12.11.2"
+    "@types/chai": "^4.2.3",
+    "@types/cucumber": "^4.0.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.11.2",
+    "chai": "^4.2.0",
+    "cucumber": "^5.1.0",
+    "cucumber-tsflow": "^3.2.0",
+    "mocha": "^6.2.2"
   },
   "dependencies": {
     "@types/pg": "^7.11.2",

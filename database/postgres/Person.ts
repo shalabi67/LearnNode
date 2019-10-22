@@ -1,6 +1,7 @@
 import {DataModel} from "./DataModel";
 
-export class Person implements DataModel{
+export class Person extends DataModel{
+
     static create(first_name: string, last_name: string, email: string) {
         let person = new Person();
         person.first_name = first_name;
@@ -8,6 +9,15 @@ export class Person implements DataModel{
         person.email = email;
 
         return person;
+    }
+
+
+    constructor() {
+        super();
+        this.tableName = 'person';
+        this.queryColumnsString = ' id, first_name, last_name, email, created_on, last_login ';
+        this.insertColumnsString = ' first_name, last_name, email ';
+        this.insertValuesString = ' $1, $2, $3 ';
     }
 
     id: number = 0;
@@ -29,11 +39,7 @@ export class Person implements DataModel{
         return data;
     }
 
-    getQuery(): string {
-        return 'SELECT id, first_name, last_name, email, created_on, last_login FROM person';
-    }
-
-    getInsert(): string {
-        return "insert into person(first_name, last_name, email) values($1, $2, $3)";
+    setId(row: any) {
+        this.id = row[this.idName];
     }
 }

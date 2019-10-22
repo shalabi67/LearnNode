@@ -2,6 +2,7 @@ import {Client, ClientConfig} from 'pg';
 import {Person} from "./Person";
 import {DataModel} from "./DataModel";
 import {find} from "./find";
+import {Database} from "./Database";
 
 
 let configuration: ClientConfig = {
@@ -11,8 +12,10 @@ let configuration: ClientConfig = {
     user: 'postgres',
     password: 'example'
 }
+const database = new Database<Person>();
 const client = new Client(configuration);
-const insert = new Person().getInsert();
+const insert = database.getQuery(new Person());
+
 export async function save<T extends DataModel>(client : Client, statment: string, person:T) {
     //console.log("getData");
     const values = person.convert();
@@ -41,7 +44,7 @@ save<Person>(client, insert, person)
     })
     .then(() => {
         find<Person>(new Client(configuration),
-            person.getQuery() + ' where first_name=$1', [firstName])
+            database.getQuery(person) + ' where first_name=$1', [firstName])
             .then(people => {
                 console.log('get person');
                 for(const person of people) {
