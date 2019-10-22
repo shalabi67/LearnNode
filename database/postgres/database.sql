@@ -7,5 +7,8 @@ CREATE TABLE person(
     last_login TIMESTAMP
 );
 insert into person(first_name, last_name, email) values('mohammad', 'shalabi', 'a@b.com');
+insert into person(first_name, last_name, email) values('mohammad1', 'shalabi1', 'a1@b.com');
+insert into person(first_name, last_name, email) values('mohammad2', 'shalabi2', 'a2@b.com');
+insert into person(first_name, last_name, email) values('mohammad3', 'shalabi2', 'a3@b.com');
 select * from person;
 
