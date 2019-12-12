@@ -1,0 +1,8 @@
+storage:
+  dbPath: "./mongo"
+#systemLog:
+#  path: "./mongo/mongod.log"
+#  destination: "file"
+#  logAppend: true
+
+    
