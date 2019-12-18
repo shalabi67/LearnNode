@@ -10,7 +10,7 @@ router.route(UnicornsUrl)
 
     })
     .post(async (request: Request, response: Response) => {
-        return response.status(200)
+        return unicornController.addRental(request.body, response);
     });
 
 
