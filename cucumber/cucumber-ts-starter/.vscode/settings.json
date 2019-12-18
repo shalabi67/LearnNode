@@ -1,0 +1,28 @@
+{
+    "window.zoomLevel": 0,
+    "editor.tabSize": 2,
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/build": true,
+      "node_modules/**": true,
+    },
+    "editor.tabCompletion": "on",
+    "editor.formatOnSave": false,
+    "editor.minimap.enabled": true,
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.renderCharacters": true,
+    "editor.mouseWheelZoom": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "javascript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "git.autofetch": true,
+    "cucumber-gotostep.srcPath": "step-definitions"
+}

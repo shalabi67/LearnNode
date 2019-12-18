@@ -3,7 +3,7 @@ import express from 'express';
 import { Request, Response } from 'express';
 import logger from 'morgan';
 import path from 'path';
-import UnicornsRouter from './unicorn/UnicronsRouter';
+import RentalsRouter from './rentals/RentalsRouter';
 
 // Init express
 const app = express();
@@ -13,7 +13,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use('', UnicornsRouter);
+app.use('', RentalsRouter);
 
 /**
  * Point express to the 'views' directory. If you're using a
