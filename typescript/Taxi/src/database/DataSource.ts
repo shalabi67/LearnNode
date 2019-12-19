@@ -1,13 +1,12 @@
 import {RepositoryModel} from "./RepositoryModel";
 
-export interface Repository<T extends RepositoryModel, ID> {
+export interface DataSource<T extends RepositoryModel, ID> {
     save: (model: T) => T;
     update: (model: T) => T;
     findById: (id: ID) => T | undefined;
     list: () => Array<T>;
 }
-
-export class MemoryRepository<T extends RepositoryModel> implements Repository<T, number> {
+export class MemoryDataSource<T extends RepositoryModel> implements DataSource<T, number> {
     private dataIndex: Map<number, T> = new Map<number, T>();
     private counter: number = 1;
 
