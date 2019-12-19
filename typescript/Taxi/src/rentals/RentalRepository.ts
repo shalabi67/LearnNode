@@ -5,7 +5,7 @@ import {DatasourceFactory} from "../database/DatasourceFactory";
 
 export class RentalRepository extends Repository<Rental> {
     static createRentalRepository(): RentalRepository {
-        const dataSource = DatasourceFactory.createDataSource<Rental>();
+        const dataSource = DatasourceFactory.createRentalsDataSource<Rental>();
 
         return new RentalRepository(dataSource)
     }
