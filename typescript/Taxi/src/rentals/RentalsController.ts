@@ -3,6 +3,7 @@ import {BAD_REQUEST, CREATED, GONE, NOT_FOUND} from "http-status-codes";
 import {Rental} from "./Rental";
 import {RentalRepository} from "./RentalRepository";
 import {UnicornRepository} from "../unicorns/UnicornRepository";
+import {Unicorn} from "../unicorns/Unicorn";
 
 export class RentalsController {
     private rentalRepository: RentalRepository;
@@ -34,12 +35,18 @@ export class RentalsController {
             return response.status(GONE).json('Unicorn not available');
         }
 
+        const updatedRental = this.updateRental(unicorn, rental);
+
+        return response.status(CREATED).json(updatedRental);
+    }
+
+    private updateRental(unicorn: Unicorn, rental: Rental): Rental {
+        //TODO: this method should be transactional.
         unicorn.isRented = true;
         this.unicornRepository.save(unicorn);
         rental.unicorn = unicorn;
         rental.rentingDate = new Date();
-        const updatedModule = this.rentalRepository.save(rental);
 
-        return response.status(CREATED).json(updatedModule);
+        return this.rentalRepository.save(rental);
     }
 }
