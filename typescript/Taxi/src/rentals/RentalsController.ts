@@ -37,6 +37,7 @@ export class RentalsController {
         unicorn.isRented = true;
         this.unicornRepository.save(unicorn);
         rental.unicorn = unicorn;
+        rental.rentingDate = new Date();
         const updatedModule = this.rentalRepository.save(rental);
 
         return response.status(CREATED).json(updatedModule);

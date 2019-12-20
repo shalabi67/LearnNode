@@ -23,6 +23,14 @@ export class DatasourceFactory {
         return this.rentalsDatasource;
     }
 
+    static resetDataSources() {
+        this.unicornsDatasource = null;
+        this.rentalsDatasource = null;
+
+        DatasourceFactory.createRentalsDataSource();
+        DatasourceFactory.createUnicornsDataSource();
+    }
+
     private static initializeUnicornsData() {
         this.unicornsDatasource.save(DatasourceFactory.createUnicorn('Pinky Pie'));
         this.unicornsDatasource.save(DatasourceFactory.createUnicorn('Rainbow Dash'));

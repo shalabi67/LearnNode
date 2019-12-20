@@ -62,5 +62,4 @@ typings/
 .next
 *.iml
 /nodejs-getting-started/
-package-lock.json
 dist/

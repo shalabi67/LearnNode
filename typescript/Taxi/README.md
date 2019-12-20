@@ -7,6 +7,11 @@ This project provides a rest point for unicorns taxi.
 - npm i body-parser
 - npm i -D @types/body-parser
 
+### I will disable this since i do not want to add dependency on the task
+- npm i mongoose
+- npm i -D @types/mongoose
+
+
 ## Run project
 
 ### Run project

@@ -8,6 +8,13 @@ export const pErr = (err: Error) => {
     }
 };
 
+export const logError = (err: Error) => {
+    if (err) {
+        logger.error(err);
+    }
+};
+
+
 export const getRandomInt = () => {
     return Math.floor(Math.random() * 1_000_000_000_000);
 };
