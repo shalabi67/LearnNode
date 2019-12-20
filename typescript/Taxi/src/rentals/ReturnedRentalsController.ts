@@ -1,5 +1,5 @@
 import {Response} from 'express';
-import {BAD_REQUEST, CREATED, GONE, NO_CONTENT, NOT_FOUND, OK} from "http-status-codes";
+import {NO_CONTENT, OK} from "http-status-codes";
 import {UnicornRepository} from "../unicorns/UnicornRepository";
 import {ReturnedRentalRepository} from "./ReturnedRentalRepository";
 import {RentalRepository} from "./RentalRepository";
