@@ -2,7 +2,8 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import logger from 'morgan';
 import RentalsRouter from './rentals/RentalsRouter';
-import UnicornsRouter, {UnicornsUrl} from "./unicorns/UnicornsRouter";
+import UnicornsRouter from "./unicorns/UnicornsRouter";
+import HealthRouter from './health/HealthRouter';
 
 // Init express
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use('', RentalsRouter);
 app.use('', UnicornsRouter);
+app.use('/healtz', HealthRouter);
 
 // Export express instance
 export default app;
