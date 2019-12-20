@@ -6,6 +6,8 @@ This project provides a rest point for lindera patients
 - npx express-generator-typescript "Lindera"
 - npm i body-parser
 - npm i -D @types/body-parser
+- npm i mongoose
+- npm i -D @types/mongoose
 
 ## Assumptions
 - I am assuming names are just names with english characters and no international names are needed.

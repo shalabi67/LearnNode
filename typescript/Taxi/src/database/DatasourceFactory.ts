@@ -5,6 +5,7 @@ import {Unicorn} from "../unicorns/Unicorn";
 export class DatasourceFactory {
     static unicornsDatasource: any = null;
     static rentalsDatasource: any = null;
+    static returnedRentalsDatasource: any = null;
 
     static createUnicornsDataSource<T extends RepositoryModel>(): DataSource<T, number> {
         if(this.unicornsDatasource === null) {
@@ -23,12 +24,22 @@ export class DatasourceFactory {
         return this.rentalsDatasource;
     }
 
+    static createReturnedRentalsDataSource<T extends RepositoryModel>(): DataSource<T, number> {
+        if(this.returnedRentalsDatasource === null) {
+            this.returnedRentalsDatasource = new MemoryDataSource<T>();
+        }
+
+        return this.returnedRentalsDatasource;
+    }
+
     static resetDataSources() {
         this.unicornsDatasource = null;
         this.rentalsDatasource = null;
+        this.returnedRentalsDatasource = null;
 
         DatasourceFactory.createRentalsDataSource();
         DatasourceFactory.createUnicornsDataSource();
+        DatasourceFactory.createReturnedRentalsDataSource();
     }
 
     private static initializeUnicornsData() {

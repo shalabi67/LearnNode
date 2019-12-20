@@ -1,5 +1,5 @@
 import {Response} from 'express';
-import {BAD_REQUEST, CREATED, GONE, NOT_FOUND} from "http-status-codes";
+import {BAD_REQUEST, CREATED, GONE, NOT_FOUND, OK} from "http-status-codes";
 import {Rental} from "./Rental";
 import {RentalRepository} from "./RentalRepository";
 import {UnicornRepository} from "../unicorns/UnicornRepository";
@@ -17,7 +17,7 @@ export class RentalsController {
 
     public async getRentals(response: Response): Promise<Response> {
         const rentals = this.rentalRepository.list();
-        return response.status(CREATED).json(rentals);
+        return response.status(OK).json(rentals);
     }
 
     public async addRental(rental: Rental, response: Response): Promise<Response> {
@@ -43,7 +43,7 @@ export class RentalsController {
     private updateRental(unicorn: Unicorn, rental: Rental): Rental {
         //TODO: this method should be transactional.
         unicorn.isRented = true;
-        this.unicornRepository.save(unicorn);
+        this.unicornRepository.update(unicorn);
         rental.unicorn = unicorn;
         rental.rentingDate = new Date();
 
