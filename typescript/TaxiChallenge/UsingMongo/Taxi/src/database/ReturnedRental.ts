@@ -1,6 +1,6 @@
 import mongoose, {Schema} from 'mongoose';
-import {IRental} from '../rentals/Rental';
 import {rentalSchema} from './Rental';
+import {IReturnedRental} from '../rentals/ReturnedRental';
 
 export const returnedRentalSchema: Schema = new Schema({
     rental: { type: rentalSchema, required: true},
@@ -9,4 +9,4 @@ export const returnedRentalSchema: Schema = new Schema({
 
 
 // Export the model and return your Unicorn interface
-export default mongoose.model<IRental>('ReturnedRental', returnedRentalSchema);
+export default mongoose.model<IReturnedRental>('ReturnedRental', returnedRentalSchema);

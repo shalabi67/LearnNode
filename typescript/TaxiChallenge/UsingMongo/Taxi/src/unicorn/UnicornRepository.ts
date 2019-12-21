@@ -37,11 +37,18 @@ export class UnicornRepository {
         return Unicorn.findByIdAndDelete({_id: unicornId});
     }
 
-    //if you are going to change this code be careful from racing problem where the same unicorn could be rented by more than one customer at the same time.
+    // if you are going to change this code be careful from racing problem where the same unicorn could be rented by
+    // more than one customer at the same time.
     public async rent(unicorn: any): Promise<IUnicorn> {
         const filter = { _id: unicorn._id, isRented: false };
         // @ts-ignore
         return Unicorn.findOneAndUpdate(filter, {$set:{isRented: true}},{new: true, runValidators: true});
+    }
+
+    public async returnUnicorn(unicorn: any): Promise<IUnicorn> {
+        const filter = { _id: unicorn._id, isRented: true };
+        // @ts-ignore
+        return Unicorn.findOneAndUpdate(filter, {$set:{isRented: false}},{new: true, runValidators: true});
     }
 
     public isValidId(unicornId: string) {

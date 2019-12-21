@@ -1,10 +1,9 @@
 import {Response} from 'express';
-import {BAD_REQUEST, CREATED, GONE, INTERNAL_SERVER_ERROR, NOT_FOUND, OK} from 'http-status-codes';
+import { CREATED, GONE, INTERNAL_SERVER_ERROR, NOT_FOUND, OK} from 'http-status-codes';
 import {IRental} from './Rental';
 import {RentalRepository} from './RentalRepository';
 import {UnicornRepository} from '../unicorn/UnicornRepository';
-import {IUnicorn} from '../unicorn/Unicorn';
-import {logError} from "@shared";
+
 
 export class RentalsController {
     private rentalRepository: RentalRepository;
