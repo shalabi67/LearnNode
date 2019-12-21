@@ -7,3 +7,5 @@ const port = Number(process.env.PORT || 3000);
 app.listen(port, () => {
     logger.info('Express server started on port: ' + port);
 });
+
+export const TAXI_URL= `http://${process.env.HOST}:${process.env.PORT}`;

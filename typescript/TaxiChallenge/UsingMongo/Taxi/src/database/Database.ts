@@ -15,6 +15,10 @@ export class Database {
         db.on('error', (error) => logError(error));
     }
 
+    public static isHealthyDatabase(): boolean {
+        return mongoose.connections.length > 0;
+    }
+
     public static initializeUnicorn() {
         Database.initializeUnicornsData();
     }
