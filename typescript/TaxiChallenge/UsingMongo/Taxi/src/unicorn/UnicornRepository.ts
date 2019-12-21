@@ -23,6 +23,12 @@ export class UnicornRepository {
         return Unicorn.findById(unicornId);
     }
 
+    public async findByName(unicornName: string): Promise<IUnicorn> {
+        const query = {name: unicornName};
+        // @ts-ignore
+        return Unicorn.findOne(query);
+    }
+
     public async add(unicorn: IUnicorn): Promise<IUnicorn> {
         return unicorn.save();
     }
@@ -31,9 +37,11 @@ export class UnicornRepository {
         return Unicorn.findByIdAndDelete({_id: unicornId});
     }
 
-    public async update(unicornId: string, unicorn: any): Promise<IUnicorn> {
+    //if you are going to change this code be careful from racing problem where the same unicorn could be rented by more than one customer at the same time.
+    public async rent(unicorn: any): Promise<IUnicorn> {
+        const filter = { _id: unicorn._id, isRented: false };
         // @ts-ignore
-        return Unicorn.findByIdAndUpdate(unicornId, {$set:unicorn},{new: true, runValidators: true});
+        return Unicorn.findOneAndUpdate(filter, {$set:{isRented: true}},{new: true, runValidators: true});
     }
 
     public isValidId(unicornId: string) {
