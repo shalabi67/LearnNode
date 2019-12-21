@@ -3,6 +3,7 @@ import express from 'express';
 import logger from 'morgan';
 import UnicornsRouter from './unicorn/UnicornsRouter';
 import RentalsRouter from './rentals/RentalsRouter';
+import HealthRouter from './health/HealthRouter';
 import BodyParser from 'body-parser';
 
 // Init express
@@ -15,6 +16,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use('', UnicornsRouter);
 app.use('', RentalsRouter);
+app.use('/healtz', HealthRouter);
 app.use(BodyParser.urlencoded({extended: true}));
 app.use(BodyParser.json());
 
