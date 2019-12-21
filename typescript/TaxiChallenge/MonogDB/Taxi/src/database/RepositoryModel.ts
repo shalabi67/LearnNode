@@ -1,3 +1,5 @@
-export interface RepositoryModel {
+import {Document} from "mongoose";
+
+export interface RepositoryModel extends Document {
     id: number;
 }

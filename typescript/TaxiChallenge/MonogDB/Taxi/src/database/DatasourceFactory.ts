@@ -1,6 +1,8 @@
 import {DataSource, MemoryDataSource} from "./DataSource";
 import {RepositoryModel} from "./RepositoryModel";
-import {Unicorn} from "../unicorns/Unicorn";
+import {IUnicorn} from "../unicorns/Unicorn";
+
+
 
 export class DatasourceFactory {
     static unicornsDatasource: any = null;
@@ -9,7 +11,8 @@ export class DatasourceFactory {
 
     static createUnicornsDataSource<T extends RepositoryModel>(): DataSource<T, number> {
         if(this.unicornsDatasource === null) {
-            this.unicornsDatasource = new MemoryDataSource<T>();
+            // @ts-ignore
+            this.unicornsDatasource = new MemoryDataSource<T>(null);
             DatasourceFactory.initializeUnicornsData();
         }
 
@@ -49,8 +52,8 @@ export class DatasourceFactory {
         this.unicornsDatasource.save(DatasourceFactory.createUnicorn( 'Twilight Sparkle', 30));
     }
 
-    private static createUnicorn(name: string, restDuration=15): Unicorn {
-        const unicorn =  <Unicorn>{id: -1, name: name, isRented: false, restDuration:restDuration};
+    private static createUnicorn(name: string, restDuration=15): IUnicorn {
+        const unicorn =  <IUnicorn>{id: -1, name: name, isRented: false, restDuration:restDuration};
         return unicorn;
     }
 }

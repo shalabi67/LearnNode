@@ -3,7 +3,7 @@ import {BAD_REQUEST, CREATED, GONE, NOT_FOUND, OK} from "http-status-codes";
 import {Rental} from "./Rental";
 import {RentalRepository} from "./RentalRepository";
 import {UnicornRepository} from "../unicorns/UnicornRepository";
-import {Unicorn} from "../unicorns/Unicorn";
+import {IUnicorn} from "../unicorns/Unicorn";
 
 export class RentalsController {
     private rentalRepository: RentalRepository;
@@ -26,7 +26,7 @@ export class RentalsController {
         }
 
         //TODO: notice this code has racing problem where the same unicorn could be rented by more than one customer at the same time.
-        const unicorn = this.unicornRepository.findById(rental.unicorn.id);
+        const unicorn = await this.unicornRepository.findById(rental.unicorn.id);
         if(unicorn == null) {
             return response.status(NOT_FOUND).json('Unicorn not found');
         }
@@ -35,18 +35,18 @@ export class RentalsController {
             return response.status(GONE).json('Unicorn not available');
         }
 
-        const updatedRental = this.updateRental(unicorn, rental);
+        const updatedRental = await this.updateRental(unicorn, rental);
 
         return response.status(CREATED).json(updatedRental);
     }
 
-    private updateRental(unicorn: Unicorn, rental: Rental): Rental {
+    private async updateRental(unicorn: IUnicorn, rental: Rental): Promise<Rental> {
         //TODO: this method should be transactional.
         unicorn.isRented = true;
         this.unicornRepository.update(unicorn);
         rental.unicorn = unicorn;
         rental.rentingDate = new Date();
 
-        return this.rentalRepository.save(rental);
+        return await this.rentalRepository.save(rental);
     }
 }
