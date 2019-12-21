@@ -1,7 +1,7 @@
-import mongoose, {Schema} from "mongoose";
-import {IUnicorn} from "../unicorn/Unicorn";
+import mongoose, {Schema} from 'mongoose';
+import {IUnicorn} from '../unicorn/Unicorn';
 
-const unicorn: Schema = new Schema({
+export const unicornSchema: Schema = new Schema({
     name: { type: String, required: true, trim: true},
     isRented: { type: Boolean, required: true, default: false},
     restDuration: { type: Number, required: true, default: 15}
@@ -9,5 +9,4 @@ const unicorn: Schema = new Schema({
 
 
 // Export the model and return your Unicorn interface
-export default mongoose.model<IUnicorn>('Unicorn', unicorn);
-
+export default mongoose.model<IUnicorn>('Unicorn', unicornSchema);

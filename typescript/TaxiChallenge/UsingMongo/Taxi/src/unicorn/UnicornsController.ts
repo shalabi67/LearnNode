@@ -1,7 +1,7 @@
 import {Response} from 'express';
-import {OK} from "http-status-codes";
-import {UnicornRepository} from "./UnicornRepository";
-import {Database} from "../database/Database";
+import {OK} from 'http-status-codes';
+import {UnicornRepository} from './UnicornRepository';
+import {Database} from '../database/Database';
 
 export class UnicornsController {
     private unicornRepository: UnicornRepository;

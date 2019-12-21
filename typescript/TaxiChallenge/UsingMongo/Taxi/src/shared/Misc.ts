@@ -7,5 +7,5 @@ export const logError = (err: Error) => {
 };
 
 export const logMessage = (message: string) => {
-    logger.log("info", message);
-}
+    logger.log('info', message);
+};

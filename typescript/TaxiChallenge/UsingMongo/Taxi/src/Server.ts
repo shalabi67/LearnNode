@@ -4,8 +4,6 @@ import logger from 'morgan';
 import UnicornsRouter from './unicorn/UnicornsRouter';
 import BodyParser from 'body-parser';
 
-
-
 // Init express
 const app = express();
 

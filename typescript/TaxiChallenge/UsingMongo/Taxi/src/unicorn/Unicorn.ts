@@ -1,9 +1,7 @@
-import mongoose, {Document, Schema} from "mongoose";
+import {Document} from 'mongoose';
 
 export interface IUnicorn extends Document {
-    name: string
-    isRented: boolean
-    restDuration: number
+    name: string;
+    isRented: boolean;
+    restDuration: number;
 }
-
-

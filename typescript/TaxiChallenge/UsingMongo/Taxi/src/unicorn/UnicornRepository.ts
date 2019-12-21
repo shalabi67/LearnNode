@@ -1,6 +1,7 @@
-import Unicorn from "../database/Unicorn";
-import * as mongoose from "mongoose";
-import {IUnicorn} from "./Unicorn";
+import Unicorn from '../database/Unicorn';
+import * as mongoose from 'mongoose';
+import {IUnicorn} from './Unicorn';
+
 
 export class UnicornRepository {
     private static unicornRepository: UnicornRepository;

@@ -6,6 +6,7 @@
     "ordered-imports": false,
     "quotemark": [true, "single"],
     "trailing-comma": "none",
+    "no-consecutive-blank-lines": [true, 2],
     "whitespace": [false, "check-postbrace"]
   },
   "linterOptions": {
