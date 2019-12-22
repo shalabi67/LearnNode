@@ -10,7 +10,7 @@ export class UnicornsController {
     }
 
     public async getUnicorns(response: Response): Promise<Response> {
-        const rentals = await this.unicornRepository.list();
+        const rentals = this.unicornRepository.list();
         return response.status(OK).json(rentals);
     }
 }

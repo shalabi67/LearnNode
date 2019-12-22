@@ -7,19 +7,19 @@ export class Repository<T extends RepositoryModel>  {
         this.dataSource = dataSource;
     }
 
-    save(model: T): Promise<T> {
+    save(model: T): T {
         return this.dataSource.save(model)
     }
 
-    findById(id: number):  Promise<T | null> {
+    findById(id: number): T | undefined {
         return this.dataSource.findById(id)
     }
 
-    update(model: T):  Promise<T> {
+    update(model: T): T {
         return this.dataSource.update(model)
     }
 
-    list():  Promise<Array<T>> {
+    list(): Array<T> {
         return this.dataSource.list()
     }
 }
