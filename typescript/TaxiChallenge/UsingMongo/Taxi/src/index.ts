@@ -8,4 +8,3 @@ app.listen(port, () => {
     logger.info('Express server started on port: ' + port);
 });
 
-export const TAXI_URL= `http://${process.env.HOST}:${process.env.PORT}`;
