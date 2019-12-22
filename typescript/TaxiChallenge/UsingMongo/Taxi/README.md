@@ -8,6 +8,7 @@ This project provides a rest point for Taxi unicorns
 - npm i -D @types/body-parser
 - npm i mongoose
 - npm i -D @types/mongoose
+- npm i node-fetch
 
 ## Run project
 copy provided files to a new folder and move to that folder.
