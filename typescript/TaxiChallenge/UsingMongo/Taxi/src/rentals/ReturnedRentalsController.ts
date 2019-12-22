@@ -5,6 +5,7 @@ import {ReturnedRentalRepository} from './ReturnedRentalRepository';
 import {RentalRepository} from './RentalRepository';
 import ReturnedRental from '../database/ReturnedRental';
 import {logMessage} from "@shared";
+import {IUnicorn} from "../unicorn/Unicorn";
 
 export class ReturnedRentalsController {
     private rentalReturnRepository: ReturnedRentalRepository;
@@ -37,13 +38,17 @@ export class ReturnedRentalsController {
                         //This can be send as notification.
                         logMessage(`unicorn with name name="${returnedUnicorn.name}" is ready for renting`);
                     })
-            },rental.unicorn.restDuration*60*1000
+            }, this.getRestDuration(rental.unicorn)
         );
 
         const returnedRental = new ReturnedRental({rental, returningDate: new Date()});
         const newReturnedRental = await this.rentalReturnRepository.add(returnedRental);
 
         return response.status(OK).json(newReturnedRental);
+    }
+
+    public getRestDuration(unicorn: IUnicorn) {
+        return unicorn.restDuration*60*100;
     }
 
 }

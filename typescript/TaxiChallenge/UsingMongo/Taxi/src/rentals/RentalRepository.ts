@@ -18,7 +18,7 @@ export class RentalRepository {
         return Rental.find();
     }
 
-    public async find(rentalId: string): Promise<IRental> {
+    public async find(rentalId: string): Promise<IRental | null> {
         // @ts-ignore
         return Rental.findById(rentalId);
     }

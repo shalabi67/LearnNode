@@ -22,7 +22,7 @@ export class RentalsController {
     }
 
     public async addRental(rental: IRental, response: Response): Promise<Response> {
-        const unicorn = await UnicornRepository.create().findByName(rental.unicorn.name);
+        const unicorn = await this.unicornRepository.findByName(rental.unicorn.name);
         if(unicorn == null) {
             return response.status(NOT_FOUND).json('Unicorn not found');
         }

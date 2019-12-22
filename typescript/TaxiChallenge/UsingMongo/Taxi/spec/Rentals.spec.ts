@@ -29,9 +29,9 @@ describe('Unicorn rental:', () => {
     beforeAll((done) => {
         agent = supertest.agent(app);
 
-        spyOn(UnicornRepository.prototype, 'rent')
+        spyOn(UnicornRepository.create(), 'rent')
             .and.returnValue(Promise.resolve(rentedUnicorn));
-        spyOn(RentalRepository.prototype, 'add')
+        spyOn(RentalRepository.create(), 'add')
             .and.returnValue(Promise.resolve(rental));
 
         done();
@@ -45,7 +45,7 @@ describe('Unicorn rental:', () => {
 
     describe('renting available unicorn', () => {
         it('should rent a unicorn', function (done:NextFunction) {
-            spyOn(UnicornRepository.prototype, 'findByName')
+            spyOn(UnicornRepository.create(), 'findByName')
                 .and.returnValue(Promise.resolve(unicorn));
 
             const rental = {unicorn: {name: "Pinky Pie"}};
@@ -62,7 +62,7 @@ describe('Unicorn rental:', () => {
 
     describe('renting non exiting unicorn', () => {
         it('should return not found error', function (done:NextFunction) {
-            spyOn(UnicornRepository.prototype, 'findByName')
+            spyOn(UnicornRepository.create(), 'findByName')
                 .and.returnValue(Promise.resolve(null));
 
             const rental = {unicorn: unicorn};
@@ -72,7 +72,7 @@ describe('Unicorn rental:', () => {
 
     describe('renting rented unicorn', () => {
         it('should return GONE error', function (done:NextFunction) {
-            spyOn(UnicornRepository.prototype, 'findByName')
+            spyOn(UnicornRepository.create(), 'findByName')
                 .and.returnValue(Promise.resolve(rentedUnicorn));
 
             const rental = {unicorn: unicornName};

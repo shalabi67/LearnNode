@@ -10,7 +10,7 @@ export class UnicornRepository {
             UnicornRepository.unicornRepository = new UnicornRepository();
         }
 
-        return new UnicornRepository();
+        return UnicornRepository.unicornRepository;
     }
 
 
