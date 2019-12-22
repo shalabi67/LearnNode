@@ -4,8 +4,8 @@ import {UnicornRepository} from '../unicorn/UnicornRepository';
 import {ReturnedRentalRepository} from './ReturnedRentalRepository';
 import {RentalRepository} from './RentalRepository';
 import ReturnedRental from '../database/ReturnedRental';
-import {logMessage} from "@shared";
-import {IUnicorn} from "../unicorn/Unicorn";
+import {logMessage} from '@shared';
+import {IUnicorn} from '../unicorn/Unicorn';
 
 export class ReturnedRentalsController {
     private rentalReturnRepository: ReturnedRentalRepository;
@@ -35,11 +35,14 @@ export class ReturnedRentalsController {
         setTimeout(() => {
                 this.unicornRepository.returnUnicorn(rental.unicorn)
                     .then((returnedUnicorn) => {
-                        //This can be send as notification.
-                        logMessage(`unicorn with name name="${returnedUnicorn.name}" is ready for renting`);
-                    })
+                        // This can be send as notification.
+                        logMessage(`unicorn with name name='${returnedUnicorn.name}' is ready for renting`);
+                    });
             }, this.getRestDuration(rental.unicorn)
         );
+
+        // this code should be transactional.
+        await this.rentalRepository.delete(rental._id);
 
         const returnedRental = new ReturnedRental({rental, returningDate: new Date()});
         const newReturnedRental = await this.rentalReturnRepository.add(returnedRental);
