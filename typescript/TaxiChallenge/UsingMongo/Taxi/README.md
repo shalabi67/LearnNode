@@ -23,6 +23,9 @@ copy provided files to a new folder and move to that folder.
 - Even though I provided integration tests, but i did not provide unit tests.
 - The provided tests does not cover all scenarios, for example it did not check for the ready time of a returned unicorn.
 - I just provided a health for unicorn end point but not for other endpoints.
+- If the system went down and there are some unicorns in the rest, they will not be shown as rented. 
+I did not fix that, but here are two way to fix it. when system start it checks for these and resolve this issue. 
+or we can send the notification to message queue.
 
 ### notice
 - I did not provide a docker-compose for mongo, since in the machine I implemented this i have no docker.
