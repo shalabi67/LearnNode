@@ -48,7 +48,7 @@ export class ReturnedRentalsController {
     }
 
     public getRestDuration(unicorn: IUnicorn) {
-        return unicorn.restDuration*60*100;
+        return unicorn.restDuration*60*1000;
     }
 
 }
