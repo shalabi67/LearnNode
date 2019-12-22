@@ -48,6 +48,7 @@ describe('Unicorn rental return:', () => {
 
     describe('returning rented unicorn', () => {
         it('should return a unicorn',(done: NextFunction) => {
+            spyOn(RentalRepository.create(), 'delete').and.returnValue(Promise.resolve(rental));
             spyOn(RentalRepository.create(), 'find').and.returnValue(Promise.resolve(rental));
             spyOn(UnicornRepository.create(), 'returnUnicorn').and.callFake((unicorn)=> {
                 expect(unicorn.isRented).toBe(true);
