@@ -1,5 +1,5 @@
-# Lindera
-This project provides a rest point for lindera patients
+# Taxi
+This project provides a rest point for Taxi unicorns
 
 ## Create project
 - npm install -g express-generator-typescript
@@ -16,10 +16,17 @@ copy provided files to a new folder and move to that folder.
 - npm install
 - npm run build
 - npm start
-- url: http://localhost:8080/patients
+- url: http://localhost:8080
 
+### Did not do
+- Even though I provided integration tests, but i did not provide unit tests.
+- The provided tests does not cover all scenarios, for example it did not check for the ready time of a returned unicorn.
+- I just provided a health for unicorn end point but not for other endpoints.
 
 ### notice
 - I did not provide a docker-compose for mongo, since in the machine I implemented this i have no docker.
+- I provided a set of extra apis to help you see the changes without the need to go to mongodb.
+- I provided an API to initialize unicorns in mongodb.
+- I provided a postman file to help you import these APIs.
 
 
