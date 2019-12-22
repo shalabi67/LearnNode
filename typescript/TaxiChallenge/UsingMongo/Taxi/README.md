@@ -16,6 +16,7 @@ copy provided files to a new folder and move to that folder.
 ### Run project
 - npm install
 - npm run build
+- npm test
 - npm start
 - url: http://localhost:8080
 
