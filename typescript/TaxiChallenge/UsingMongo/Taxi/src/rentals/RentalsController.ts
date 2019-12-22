@@ -15,13 +15,14 @@ export class RentalsController {
         this.unicornRepository = unicornRepository;
     }
 
+
     public async getRentals(response: Response): Promise<Response> {
         const rentals = this.rentalRepository.getAll();
         return response.status(OK).json(rentals);
     }
 
     public async addRental(rental: IRental, response: Response): Promise<Response> {
-        const unicorn = await this.unicornRepository.findByName(rental.unicorn.name);
+        const unicorn = await UnicornRepository.create().findByName(rental.unicorn.name);
         if(unicorn == null) {
             return response.status(NOT_FOUND).json('Unicorn not found');
         }

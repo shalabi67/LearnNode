@@ -10,7 +10,7 @@ export class UnicornRepository {
             UnicornRepository.unicornRepository = new UnicornRepository();
         }
 
-        return UnicornRepository.unicornRepository;
+        return new UnicornRepository();
     }
 
 
@@ -23,7 +23,7 @@ export class UnicornRepository {
         return Unicorn.findById(unicornId);
     }
 
-    public async findByName(unicornName: string): Promise<IUnicorn> {
+    public async findByName(unicornName: string): Promise<IUnicorn | null> {
         const query = {name: unicornName};
         // @ts-ignore
         return Unicorn.findOne(query);
