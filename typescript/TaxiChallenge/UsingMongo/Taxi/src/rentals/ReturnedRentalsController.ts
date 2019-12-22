@@ -4,6 +4,7 @@ import {UnicornRepository} from '../unicorn/UnicornRepository';
 import {ReturnedRentalRepository} from './ReturnedRentalRepository';
 import {RentalRepository} from './RentalRepository';
 import ReturnedRental from '../database/ReturnedRental';
+import {logMessage} from "@shared";
 
 export class ReturnedRentalsController {
     private rentalReturnRepository: ReturnedRentalRepository;
@@ -29,11 +30,17 @@ export class ReturnedRentalsController {
             return response.status(NO_CONTENT).json(`could not find rental with id= ${rentalId}`);
         }
 
+        // TODO: what if the system went down. to do this se can use messaging system
+        setTimeout(() => {
+                this.unicornRepository.returnUnicorn(rental.unicorn)
+                    .then((returnedUnicorn) => {
+                        //This can be send as notification.
+                        logMessage(`unicorn with name name="${returnedUnicorn.name}" is ready for renting`);
+                    })
+            },rental.unicorn.restDuration*60*1000
+        );
+
         const returnedRental = new ReturnedRental({rental, returningDate: new Date()});
-        const returnedUnicorn = await this.unicornRepository.returnUnicorn(rental.unicorn);
-        if(returnedUnicorn == null) {
-            return response.status(GONE).json(`could not find rented unicorn with id= ${rental.unicorn._id}`);
-        }
         const newReturnedRental = await this.rentalReturnRepository.add(returnedRental);
 
         return response.status(OK).json(newReturnedRental);
