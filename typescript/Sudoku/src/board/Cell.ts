@@ -27,7 +27,7 @@ export class Cell {
         return this.candidates.has(value);
     }
 
-    public getCandidates(): Set<String> {
+    public getCandidates(): Set<string> {
         return this.candidates
     }
 

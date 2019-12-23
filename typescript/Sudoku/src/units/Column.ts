@@ -1,6 +1,7 @@
 import {Unit} from "./Unit";
 import {Cell} from "../board/Cell";
 import {board} from "../index";
+import {PositionalCell} from "../board/PositionalCell";
 
 export class Column extends Unit {
 
@@ -10,7 +11,11 @@ export class Column extends Unit {
 
     protected removeCellsCandidates(value: string): any {
         for(let i=0; i<board.width; i++) {
-            this.cells[i][this.unitNumber].removeCandidate(value);
+            const cell = this.cells[i][this.unitNumber];
+            cell.removeCandidate(value);
+            if(cell.getCandidates().size == 1){
+                board.singleCandidateCells.add(new PositionalCell(i, this.unitNumber, cell));
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 import {Unit} from "./Unit";
 import {Cell} from "../board/Cell";
 import {board} from "../index";
+import {PositionalCell} from "../board/PositionalCell";
 
 export class Box extends Unit {
     public static getBoxNumber(width: number, row: number, column: number): number {
@@ -18,7 +19,11 @@ export class Box extends Unit {
         const startingColumn = this.getStartingColumn(rowBoxes);
         for(let i=startingRow; i<rowBoxes + startingRow; i++) {
             for(let j=startingColumn; j<rowBoxes + startingColumn; j++) {
-                this.cells[i][j].removeCandidate(value);
+                const cell = this.cells[i][j];
+                cell.removeCandidate(value);
+                if(cell.getCandidates().size == 1) {
+                    board.singleCandidateCells.add(new PositionalCell(i, j, cell));
+                }
             }
         }
     }

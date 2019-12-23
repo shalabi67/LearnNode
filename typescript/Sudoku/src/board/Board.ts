@@ -4,6 +4,7 @@ import {Column} from "../units/Column";
 import {Box} from "../units/Box";
 import {DefaultUnit} from "../units/DefaultUnit";
 import {board} from "../index";
+import {PositionalCell} from "./PositionalCell";
 
 export class Board {
     public readonly width: number;
@@ -13,6 +14,8 @@ export class Board {
     protected rows: Row[] = [];
     protected columns: Column[] = [];
     protected boxes: Box[] = [];
+
+    public singleCandidateCells: Set<PositionalCell> = new Set<PositionalCell>();
 
     constructor(defaultRow: string[]) {
         this.width = defaultRow.length;
@@ -67,5 +70,12 @@ export class Board {
                 }
             }
         }
+
+        this.singleCandidateCells.forEach((positionalCell) => {
+            positionalCell.cell.getCandidates().forEach((value => {
+                this.setValue(positionalCell.row, positionalCell.column, value);
+            }));
+            this.singleCandidateCells.delete(positionalCell);
+        });
     }
 }
