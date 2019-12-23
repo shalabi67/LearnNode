@@ -3,6 +3,7 @@ import {NO_CONTENT, OK} from "http-status-codes";
 import {UnicornRepository} from "../unicorns/UnicornRepository";
 import {ReturnedRentalRepository} from "./ReturnedRentalRepository";
 import {RentalRepository} from "./RentalRepository";
+import {ReturnedRental} from "./ReturnedRental";
 
 export class ReturnedRentalsController {
     private rentalReturnRepository: ReturnedRentalRepository;
