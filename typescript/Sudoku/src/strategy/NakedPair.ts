@@ -23,7 +23,7 @@ export class NakedPair extends Strategy {
         const pair = pairs.values().next().value;
         pairs.delete(pair);
         let equalPairs = new Set([...pairs].filter((cell) => this.areMatch(cell, pair)));
-        if(equalPairs.size > 1) {
+        if(equalPairs.size >= 1) {
             return pair;
         }
         return this.findNakedCell(pairs);
