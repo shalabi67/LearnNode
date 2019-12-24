@@ -4,11 +4,10 @@ import {Column} from "../units/Column";
 import {Box} from "../units/Box";
 import {DefaultUnit} from "../units/DefaultUnit";
 import {board} from "../index";
-import {PositionalCell} from "./PositionalCell";
 import {Strategy} from "../strategy/Strategy";
 import {LastCandidate} from "../strategy/LastCandidate";
-import {NakedPair} from "../strategy/NakedPair";
 import {HiddenSingle} from "../strategy/HiddenSingle";
+import {NakedPair} from "../strategy/NakedPair";
 
 export class Board {
     public readonly width: number;
@@ -27,7 +26,7 @@ export class Board {
 
         this.strategies.push(new LastCandidate());
         this.strategies.push(new HiddenSingle());
-        //this.strategies.push(new NakedPair());
+        this.strategies.push(new NakedPair());
 
         for(let i=0; i<this.width; i++) {
             this.rows.push(new Row(this.cells, i));
