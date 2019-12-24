@@ -15,9 +15,17 @@ export class PositionalCell {
     }
 
     public removeCandidate(value: string) {
-        this.cell.removeCandidate(value);
-        if(this.cell.getCandidates().size == 1) {
+        if(this.cell.solved()) return;
+
+        if(this.cell.getCandidates().size === 1) {
             LastCandidate.addLastCandidate(this);
+            return;
         }
+        this.cell.removeCandidate(value);
+        if(this.cell.getCandidates().size === 0) {
+            console.log("error");
+            throw new Error('Remove last candidate')
+        }
+
     }
 }

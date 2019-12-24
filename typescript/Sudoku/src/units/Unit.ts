@@ -53,7 +53,6 @@ export abstract class Unit {
         this.execute((i: number, j: number, cell: Cell) => {
             if(cell.getCandidates().size == 0) return;
 
-
             let candidates = [...difference].filter((value => cell.getCandidates().has(value)));
             if(candidates.length == 1) {  //validate it is a singlr hidden candidate.
                 cell.setValue(candidates[0]);
@@ -64,5 +63,17 @@ export abstract class Unit {
         return cells;
     }
 
-    protected abstract execute(callback: any): any;
+    findCellsByCandidates(candidates: Set<string>): Set<PositionalCell> {
+        const cells = new Set<PositionalCell>();
+        this.execute((i: number, j: number, cell: Cell) => {
+            let intersection = [...candidates].filter((candidate) => cell.getCandidates().has(candidate));
+            if(intersection.length === candidates.size && cell.getCandidates().size === candidates.size) {
+                cells.add(new PositionalCell(i, j, cell));
+            }
+        });
+
+        return cells;
+    }
+
+    public abstract execute(callback: any): any;
 }

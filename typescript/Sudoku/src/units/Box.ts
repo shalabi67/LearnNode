@@ -31,7 +31,7 @@ export class Box extends Unit {
         return pair;
     }
 
-    protected execute(callback: any): any {
+    public execute(callback: any): any {
         const rowBoxes = Math.sqrt(board.width);
         const startingRow = this.getStartingRow(rowBoxes);
         const startingColumn = this.getStartingColumn(rowBoxes);

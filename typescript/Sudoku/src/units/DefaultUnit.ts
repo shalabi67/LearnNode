@@ -34,5 +34,5 @@ export class DefaultUnit extends Unit {
         return new Set<Cell>();
     }
 
-    protected execute(callback: any) {}
+    public execute(callback: any) {}
 }

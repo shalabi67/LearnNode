@@ -27,7 +27,7 @@ export class Column extends Unit {
         return pair;
     }
 
-    protected execute(callback: any) {
+    public execute(callback: any) {
         for(let i=0; i<board.width; i++) {
             const cell = this.cells[i][this.unitNumber];
             callback(i, this.unitNumber, cell);

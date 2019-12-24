@@ -18,6 +18,8 @@ export class Board {
     protected columns: Column[] = [];
     protected boxes: Box[] = [];
 
+    private updated: boolean = true;
+
     protected strategies: Strategy[] = [];
 
     constructor(defaultRow: string[]) {
@@ -26,7 +28,9 @@ export class Board {
 
         this.strategies.push(new LastCandidate());
         this.strategies.push(new HiddenSingle());
+        this.strategies.push(new LastCandidate());
         this.strategies.push(new NakedPair());
+        this.strategies.push(new LastCandidate());
 
         for(let i=0; i<this.width; i++) {
             this.rows.push(new Row(this.cells, i));
@@ -35,23 +39,27 @@ export class Board {
         }
     }
 
-    public getRows(): Row[] {
+    setUpdated() {
+        this.updated = true;
+    }
+
+    getRows(): Row[] {
         return this.rows;
     }
 
-    public getColumns(): Column[] {
+    getColumns(): Column[] {
         return this.columns;
     }
 
-    public getBoxes(): Box[] {
+    getBoxes(): Box[] {
         return this.boxes;
     }
 
-    public getCells(): Cell[][] {
+    getCells(): Cell[][] {
         return this.cells;
     }
 
-    public addRow(rowNumber: number, row: string[]) {
+    addRow(rowNumber: number, row: string[]) {
         if(this.width != row.length) {
             throw 'Invalid row width';
         }
@@ -63,7 +71,7 @@ export class Board {
         this.cells.push(cellRow);
     }
 
-    public print() {
+    print() {
         console.log('********************************************************************');
         const width = this.cells[0].length;
         for (let i = 0; i<width; i++) {
@@ -76,7 +84,7 @@ export class Board {
         console.log('********************************************************************');
     }
 
-    public setValue(row: number, column: number, value: string) {
+    setValue(row: number, column: number, value: string) {
         const boxNumber = Box.getBoxNumber(this.width, row, column);
         const defaultUnit = new DefaultUnit(this.rows[row], this.columns[column], this.boxes[boxNumber], this.cells, boxNumber);
         this.cells[row][column].setValue(value);
@@ -84,7 +92,7 @@ export class Board {
         defaultUnit.addValue(value);
     }
 
-    public initializeBoard() {
+    initializeBoard() {
         for(let i=0; i<board.width; i++) {
             for(let j=0; j<board.width; j++) {
                 const cell = this.cells[i][j];
@@ -107,7 +115,14 @@ export class Board {
          */
     }
 
-    public solve() {
-        this.strategies.forEach((strategy) => strategy.execute(this));
+    solve() {
+        while(this.updated) {
+            this.updated = false;
+            this.strategies.forEach((strategy) => {
+                strategy.execute(this);
+                this.print();
+            });
+
+        }
     }
 }

@@ -2,6 +2,7 @@ import {Strategy} from "./Strategy";
 import {Unit} from "../units/Unit";
 import {Cell} from "../board/Cell";
 import {board} from "../index";
+import {PositionalCell} from "../board/PositionalCell";
 
 export class NakedPair extends Strategy {
     executeUnit(unit: Unit) {
@@ -13,7 +14,24 @@ export class NakedPair extends Strategy {
             return;
         }
 
-        nakedCell.getCandidates().forEach((candidate) => unit.removeCellsCandidates(candidate));
+        const nakedPositionalCells = unit.findCellsByCandidates(nakedCell.getCandidates());
+        unit.execute((i: number, j: number, cell: Cell) => {
+            const currentPositionalCell = new PositionalCell(i, j, cell);
+            // do nothing if cell has no candidates or it is on of the naked pairs
+            if(cell.getCandidates().size===0 || this.isNakedCell(currentPositionalCell, nakedPositionalCells)) return;
+
+            nakedCell.getCandidates().forEach((candidate) => currentPositionalCell.removeCandidate(candidate));
+        });
+    }
+
+    private isNakedCell(currentPositionalCell: PositionalCell, nakedPositionalCells: Set<PositionalCell>): boolean {
+        for(let cell of nakedPositionalCells) {
+            if(currentPositionalCell.row === cell.row && currentPositionalCell.column === cell.column) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private findNakedCell(pairs: Set<Cell>): Cell | null {

@@ -21,6 +21,11 @@ export class Cell {
 
     public removeCandidate(value: string) {
         this.candidates.delete(value);
+        board.setUpdated();
+        if(this.getCandidates().size === 0) {
+            console.log("error");
+            throw new Error('Remove last candidate')
+        }
     }
 
     public hasCandidate(value: string) {
@@ -36,6 +41,7 @@ export class Cell {
     }
 
     public setValue(value: string) {
+        board.setUpdated();
         this.candidates = new Set<string>();
         return this.value = value;
     }
