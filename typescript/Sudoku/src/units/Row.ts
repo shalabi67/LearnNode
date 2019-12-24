@@ -18,4 +18,13 @@ export class Row extends Unit {
         }
     }
 
+    findPairs(): Set<Cell> {
+        const pair: Set<Cell> = new Set<Cell>();
+        for(let i=0; i<board.width; i++) {
+            const cell = this.cells[this.unitNumber][i];
+            pair.add(cell);
+        }
+        return pair;
+    }
+
 }

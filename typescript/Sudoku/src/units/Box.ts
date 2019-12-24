@@ -28,6 +28,21 @@ export class Box extends Unit {
         }
     }
 
+    findPairs(): Set<Cell> {
+        const rowBoxes = Math.sqrt(board.width);
+        const startingRow = this.getStartingRow(rowBoxes);
+        const startingColumn = this.getStartingColumn(rowBoxes);
+
+        const pair: Set<Cell> = new Set<Cell>();
+        for(let i=startingRow; i<rowBoxes + startingRow; i++) {
+            for(let j=startingColumn; j<rowBoxes + startingColumn; j++) {
+                const cell = this.cells[i][j];
+                pair.add(cell);
+            }
+        }
+        return pair;
+    }
+
     // what is the cells row this boy number belongs to
     private getStartingRow(rowBoxes: number) {
         return Math.trunc(this.unitNumber / rowBoxes) * rowBoxes;

@@ -24,4 +24,6 @@ export abstract class Unit {
     public deleteValue(value: string) {
         this.values.delete(value);
     }
+
+    public abstract findPairs(): Set<Cell>;
 }
