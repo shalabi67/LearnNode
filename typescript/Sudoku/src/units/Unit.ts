@@ -1,4 +1,5 @@
 import {Cell} from "../board/Cell";
+import {PositionalCell} from "../board/PositionalCell";
 
 export abstract class Unit {
     //identify empty cell numbers
@@ -14,7 +15,7 @@ export abstract class Unit {
     //values in this unit
     protected values: Set<string> = new Set();
 
-    protected abstract removeCellsCandidates(value: string):any;
+    public abstract removeCellsCandidates(value: string):any;
 
     public addValue(value: string) {
         this.values.add(value);
@@ -26,4 +27,42 @@ export abstract class Unit {
     }
 
     public abstract findPairs(): Set<Cell>;
+
+    public findHiddenSingle(): Set<PositionalCell> {
+        // it is the one who has count = 1
+        let map = new Map<string, number>();
+        this.execute((i: number, j: number, cell: Cell) => {
+            cell.getCandidates().forEach((candidate) => {
+                let count = 1;
+                if(map.has(candidate)) {
+                    // @ts-ignore
+                    count = map.get(candidate) + 1;
+                }
+                map.set(candidate, count);
+            });
+        });
+
+        // find to which cell the candidate belongs. notice now it is unique candidate in the unit.
+        let difference = new Set<string>();
+        map.forEach((count, key, map1) => {
+            if(count == 1) {
+                difference.add(key);
+            }
+        });
+        let cells = new Set<PositionalCell>();
+        this.execute((i: number, j: number, cell: Cell) => {
+            if(cell.getCandidates().size == 0) return;
+
+
+            let candidates = [...difference].filter((value => cell.getCandidates().has(value)));
+            if(candidates.length == 1) {  //validate it is a singlr hidden candidate.
+                cell.setValue(candidates[0]);
+                cells.add(new PositionalCell(i, j, cell));
+            }
+        });
+
+        return cells;
+    }
+
+    protected abstract execute(callback: any): any;
 }

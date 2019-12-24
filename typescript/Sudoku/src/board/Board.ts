@@ -7,6 +7,8 @@ import {board} from "../index";
 import {PositionalCell} from "./PositionalCell";
 import {Strategy} from "../strategy/Strategy";
 import {LastCandidate} from "../strategy/LastCandidate";
+import {NakedPair} from "../strategy/NakedPair";
+import {HiddenSingle} from "../strategy/HiddenSingle";
 
 export class Board {
     public readonly width: number;
@@ -24,12 +26,30 @@ export class Board {
         this.defaultRow = defaultRow;
 
         this.strategies.push(new LastCandidate());
+        this.strategies.push(new HiddenSingle());
+        //this.strategies.push(new NakedPair());
 
         for(let i=0; i<this.width; i++) {
             this.rows.push(new Row(this.cells, i));
             this.columns.push(new Column(this.cells, i));
             this.boxes.push(new Box(this.cells, i));
         }
+    }
+
+    public getRows(): Row[] {
+        return this.rows;
+    }
+
+    public getColumns(): Column[] {
+        return this.columns;
+    }
+
+    public getBoxes(): Box[] {
+        return this.boxes;
+    }
+
+    public getCells(): Cell[][] {
+        return this.cells;
     }
 
     public addRow(rowNumber: number, row: string[]) {
