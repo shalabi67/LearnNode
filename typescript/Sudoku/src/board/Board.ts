@@ -5,6 +5,8 @@ import {Box} from "../units/Box";
 import {DefaultUnit} from "../units/DefaultUnit";
 import {board} from "../index";
 import {PositionalCell} from "./PositionalCell";
+import {Strategy} from "../strategy/Strategy";
+import {LastCandidate} from "../strategy/LastCandidate";
 
 export class Board {
     public readonly width: number;
@@ -15,11 +17,13 @@ export class Board {
     protected columns: Column[] = [];
     protected boxes: Box[] = [];
 
-    public singleCandidateCells: Set<PositionalCell> = new Set<PositionalCell>();
+    protected strategies: Strategy[] = [];
 
     constructor(defaultRow: string[]) {
         this.width = defaultRow.length;
         this.defaultRow = defaultRow;
+
+        this.strategies.push(new LastCandidate());
 
         for(let i=0; i<this.width; i++) {
             this.rows.push(new Row(this.cells, i));
@@ -71,11 +75,20 @@ export class Board {
             }
         }
 
+        this.solve();
+
+        /*
         this.singleCandidateCells.forEach((positionalCell) => {
             positionalCell.cell.getCandidates().forEach((value => {
                 this.setValue(positionalCell.row, positionalCell.column, value);
             }));
             this.singleCandidateCells.delete(positionalCell);
         });
+
+         */
+    }
+
+    public solve() {
+        this.strategies.forEach((strategy) => strategy.execute(this));
     }
 }

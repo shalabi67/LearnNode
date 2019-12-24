@@ -1,4 +1,6 @@
 import {Cell} from "./Cell";
+import {board} from "../index";
+import {LastCandidate} from "../strategy/LastCandidate";
 
 export class PositionalCell {
     public row: number;
@@ -10,5 +12,12 @@ export class PositionalCell {
         this.row = row;
         this.column = column;
         this.cell = cell;
+    }
+
+    public removeCandidate(value: string) {
+        this.cell.removeCandidate(value);
+        if(this.cell.getCandidates().size == 1) {
+            LastCandidate.addLastCandidate(this);
+        }
     }
 }

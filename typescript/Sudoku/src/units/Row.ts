@@ -10,10 +10,8 @@ export class Row extends Unit {
 
     protected removeCellsCandidates(value: string): any {
         this.execute((i: number, j: number, cell: Cell) => {
-            cell.removeCandidate(value);
-            if(cell.getCandidates().size == 1){
-                board.singleCandidateCells.add(new PositionalCell(this.unitNumber, i, cell));
-            }
+            const positionalCell = new PositionalCell(this.unitNumber, i, cell);
+            positionalCell.removeCandidate(value);
         });
         /*
         for(let i=0; i<board.width; i++) {
