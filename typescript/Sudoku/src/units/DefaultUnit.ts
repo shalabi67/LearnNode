@@ -27,10 +27,12 @@ export class DefaultUnit extends Unit {
         this.values.delete(value);
     }
 
-    protected removeCellsCandidates(value: string): any {
+    public removeCellsCandidates(value: string): any {
     }
 
     findPairs(): Set<Cell> {
         return new Set<Cell>();
     }
+
+    public execute(callback: any) {}
 }

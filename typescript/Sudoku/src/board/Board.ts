@@ -4,7 +4,10 @@ import {Column} from "../units/Column";
 import {Box} from "../units/Box";
 import {DefaultUnit} from "../units/DefaultUnit";
 import {board} from "../index";
-import {PositionalCell} from "./PositionalCell";
+import {Strategy} from "../strategy/Strategy";
+import {LastCandidate} from "../strategy/LastCandidate";
+import {HiddenSingle} from "../strategy/HiddenSingle";
+import {NakedPair} from "../strategy/NakedPair";
 
 export class Board {
     public readonly width: number;
@@ -15,11 +18,19 @@ export class Board {
     protected columns: Column[] = [];
     protected boxes: Box[] = [];
 
-    public singleCandidateCells: Set<PositionalCell> = new Set<PositionalCell>();
+    private updated: boolean = true;
+
+    protected strategies: Strategy[] = [];
 
     constructor(defaultRow: string[]) {
         this.width = defaultRow.length;
         this.defaultRow = defaultRow;
+
+        this.strategies.push(new LastCandidate());
+        this.strategies.push(new HiddenSingle());
+        this.strategies.push(new LastCandidate());
+        this.strategies.push(new NakedPair());
+        this.strategies.push(new LastCandidate());
 
         for(let i=0; i<this.width; i++) {
             this.rows.push(new Row(this.cells, i));
@@ -28,7 +39,27 @@ export class Board {
         }
     }
 
-    public addRow(rowNumber: number, row: string[]) {
+    setUpdated() {
+        this.updated = true;
+    }
+
+    getRows(): Row[] {
+        return this.rows;
+    }
+
+    getColumns(): Column[] {
+        return this.columns;
+    }
+
+    getBoxes(): Box[] {
+        return this.boxes;
+    }
+
+    getCells(): Cell[][] {
+        return this.cells;
+    }
+
+    addRow(rowNumber: number, row: string[]) {
         if(this.width != row.length) {
             throw 'Invalid row width';
         }
@@ -40,7 +71,7 @@ export class Board {
         this.cells.push(cellRow);
     }
 
-    public print() {
+    print() {
         console.log('********************************************************************');
         const width = this.cells[0].length;
         for (let i = 0; i<width; i++) {
@@ -53,7 +84,7 @@ export class Board {
         console.log('********************************************************************');
     }
 
-    public setValue(row: number, column: number, value: string) {
+    setValue(row: number, column: number, value: string) {
         const boxNumber = Box.getBoxNumber(this.width, row, column);
         const defaultUnit = new DefaultUnit(this.rows[row], this.columns[column], this.boxes[boxNumber], this.cells, boxNumber);
         this.cells[row][column].setValue(value);
@@ -61,7 +92,7 @@ export class Board {
         defaultUnit.addValue(value);
     }
 
-    public initializeBoard() {
+    initializeBoard() {
         for(let i=0; i<board.width; i++) {
             for(let j=0; j<board.width; j++) {
                 const cell = this.cells[i][j];
@@ -71,11 +102,27 @@ export class Board {
             }
         }
 
+        this.solve();
+
+        /*
         this.singleCandidateCells.forEach((positionalCell) => {
             positionalCell.cell.getCandidates().forEach((value => {
                 this.setValue(positionalCell.row, positionalCell.column, value);
             }));
             this.singleCandidateCells.delete(positionalCell);
         });
+
+         */
+    }
+
+    solve() {
+        while(this.updated) {
+            this.updated = false;
+            this.strategies.forEach((strategy) => {
+                strategy.execute(this);
+                this.print();
+            });
+
+        }
     }
 }
