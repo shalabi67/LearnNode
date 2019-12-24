@@ -29,4 +29,8 @@ export class DefaultUnit extends Unit {
 
     protected removeCellsCandidates(value: string): any {
     }
+
+    findPairs(): Set<Cell> {
+        return new Set<Cell>();
+    }
 }
