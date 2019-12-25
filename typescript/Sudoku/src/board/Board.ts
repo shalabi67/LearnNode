@@ -8,6 +8,7 @@ import {Strategy} from "../strategy/Strategy";
 import {LastCandidate} from "../strategy/LastCandidate";
 import {HiddenSingle} from "../strategy/HiddenSingle";
 import {NakedPair} from "../strategy/NakedPair";
+import {Unit} from "../units/Unit";
 
 export class Board {
     public readonly width: number;
@@ -33,10 +34,19 @@ export class Board {
         this.strategies.push(new LastCandidate());
 
         for(let i=0; i<this.width; i++) {
-            this.rows.push(new Row(this.cells, i));
-            this.columns.push(new Column(this.cells, i));
+            this.rows.push(new Row(this.cells, i)); // TODO: we can just send row cells no need to send all cells
+            this.columns.push(new Column(this.cells, i)); // TODO: we can just send column cells no need to send all cells
             this.boxes.push(new Box(this.cells, i));
         }
+    }
+
+    getUnits(): Set<Unit[]> {
+        const units = new Set<Unit[]>();
+        units.add(this.rows);
+        units.add(this.columns);
+        units.add(this.boxes);
+
+        return units;
     }
 
     setUpdated() {
@@ -53,10 +63,6 @@ export class Board {
 
     getBoxes(): Box[] {
         return this.boxes;
-    }
-
-    getCells(): Cell[][] {
-        return this.cells;
     }
 
     addRow(rowNumber: number, row: string[]) {
@@ -84,6 +90,7 @@ export class Board {
         console.log('********************************************************************');
     }
 
+    // TODO: This method exposes bad design. it is recommended to change it to: setValue(cell: PositionalCell, value: string)
     setValue(row: number, column: number, value: string) {
         const boxNumber = Box.getBoxNumber(this.width, row, column);
         const defaultUnit = new DefaultUnit(this.rows[row], this.columns[column], this.boxes[boxNumber], this.cells, boxNumber);
@@ -103,16 +110,6 @@ export class Board {
         }
 
         this.solve();
-
-        /*
-        this.singleCandidateCells.forEach((positionalCell) => {
-            positionalCell.cell.getCandidates().forEach((value => {
-                this.setValue(positionalCell.row, positionalCell.column, value);
-            }));
-            this.singleCandidateCells.delete(positionalCell);
-        });
-
-         */
     }
 
     solve() {

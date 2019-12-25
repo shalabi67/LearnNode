@@ -6,9 +6,7 @@ import {Unit} from "../units/Unit";
 
 export abstract class Strategy {
     execute(board: Board){
-        board.getRows().forEach((row) => this.executeUnit(row));
-        board.getColumns().forEach((column) => this.executeUnit(column));
-        board.getBoxes().forEach((box) => this.executeUnit(box));
+        board.getUnits().forEach((units) => units.forEach((row) => this.executeUnit(row)));
     }
 
     protected executeUnit(unit: Unit){};
