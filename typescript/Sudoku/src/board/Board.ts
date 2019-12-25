@@ -110,7 +110,6 @@ export class Board {
         }
 
         this.solve();
-        this.print();
     }
 
     solve() {
