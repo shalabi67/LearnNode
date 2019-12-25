@@ -110,6 +110,7 @@ export class Board {
         }
 
         this.solve();
+        this.print();
     }
 
     solve() {
@@ -117,7 +118,6 @@ export class Board {
             this.updated = false;
             this.strategies.forEach((strategy) => {
                 strategy.execute(this);
-                this.print();
             });
 
         }
