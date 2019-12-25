@@ -28,6 +28,7 @@ export abstract class Unit {
 
     public abstract findPairs(): Set<Cell>;
 
+    // TODO: This method need to be in Hidden Single strategy.
     public findHiddenSingle(): Set<PositionalCell> {
         // it is the one who has count = 1
         let map = new Map<string, number>();
@@ -75,5 +76,6 @@ export abstract class Unit {
         return cells;
     }
 
+    // TODO: implementation of the lambda call back function uses row, column and cell. this is not good design and they should use PositionalCell.
     public abstract execute(callback: any): any;
 }
