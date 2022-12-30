@@ -19,7 +19,7 @@
     "cucumber-html-reporter": "^5.0.2",
     "cucumber-tsflow": "^3.2.0",
     "find": "^0.3.0",
-    "mocha": "^6.2.1",
+    "mocha": "^10.2.0",
     "simple-cucumber-html-reporter": "^1.0.1"
   },
   "dependencies": {
